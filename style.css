@@ -1,0 +1,814 @@
+/* ============================================================
+   RÉVOLUTION FRANÇAISE – Livre dont vous êtes le héros
+   Style : Parchemin, typographie classique, bleu-blanc-rouge
+   ============================================================ */
+
+/* ----- Reset & Base ----- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bleu:    #1a3a6e;
+  --bleu-cl: #2c5aa0;
+  --rouge:   #8b1a1a;
+  --rouge-cl:#c0392b;
+  --or:      #c9a84c;
+  --or-cl:   #f0c060;
+  --parchemin:    #f5ead0;
+  --parchemin-dk: #e8d5a8;
+  --parchemin-ddk:#d4b97a;
+  --text-dark:    #2a1a0a;
+  --text-med:     #4a3020;
+  --shadow-dark:  rgba(0,0,0,0.55);
+  --shadow-soft:  rgba(0,0,0,0.25);
+  --font-title: 'Cinzel', serif;
+  --font-text:  'Lora', serif;
+  --font-alt:   'IM Fell English', serif;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-text);
+  background: #111;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   ÉCRANS
+   ============================================================ */
+.screen {
+  display: none;
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease;
+}
+.screen.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   ÉCRAN TITRE
+   ============================================================ */
+#screen-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.title-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(26,58,110,0.92) 0%, rgba(10,10,10,0.85) 50%, rgba(139,26,26,0.88) 100%),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a84c' fill-opacity='0.06'%3E%3Cpath d='M40 0 L80 80 L0 80Z'/%3E%3Cpath d='M0 0 L40 80 L80 0Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover, 80px 80px;
+}
+
+.title-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  max-width: 640px;
+  width: 100%;
+}
+
+.fleur-de-lis {
+  font-size: 2.8rem;
+  color: var(--or);
+  text-shadow: 0 0 18px rgba(201,168,76,0.7);
+  animation: glow 2.5s ease-in-out infinite alternate;
+  margin-bottom: 0.4rem;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(201,168,76,0.5); }
+  to   { text-shadow: 0 0 28px rgba(240,192,96,0.9), 0 0 50px rgba(201,168,76,0.4); }
+}
+
+.main-title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 7vw, 3.8rem);
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 2px 4px 8px rgba(0,0,0,0.7), 0 0 40px rgba(201,168,76,0.3);
+  line-height: 1.15;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+.main-title span {
+  color: var(--or-cl);
+  display: block;
+}
+
+.subtitle {
+  font-family: var(--font-title);
+  color: var(--or);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 1rem;
+}
+
+.divider-ornament {
+  color: var(--or);
+  font-size: 1.3rem;
+  letter-spacing: 0.4rem;
+  margin: 0.8rem 0;
+  opacity: 0.8;
+}
+
+.tagline {
+  font-family: var(--font-alt);
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Cocarde tricolore */
+.cockade {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--bleu) 0deg 120deg,
+    #fff       120deg 240deg,
+    var(--rouge-cl) 240deg 360deg
+  );
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0 0 4px var(--or), 0 0 20px rgba(201,168,76,0.5);
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+.name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.name-form label {
+  color: var(--or-cl);
+  font-family: var(--font-title);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.name-form input {
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px;
+  border: 2px solid var(--or);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-family: var(--font-alt);
+  font-size: 1.1rem;
+  width: 260px;
+  text-align: center;
+  outline: none;
+  transition: background 0.3s, border-color 0.3s;
+}
+.name-form input:focus {
+  background: rgba(255,255,255,0.18);
+  border-color: var(--or-cl);
+}
+.name-form input::placeholder { color: rgba(255,255,255,0.4); }
+
+.level-info {
+  margin-top: 1.4rem;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   BOUTONS
+   ============================================================ */
+.btn-primary {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-cl) 100%);
+  color: var(--or-cl);
+  border: 2px solid var(--or);
+  border-radius: 4px;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--rouge) 0%, var(--rouge-cl) 100%);
+  border-color: var(--or-cl);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+}
+
+.btn-secondary {
+  padding: 0.55rem 1.4rem;
+  background: transparent;
+  color: var(--bleu);
+  border: 2px solid var(--bleu);
+  border-radius: 4px;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.06em;
+}
+.btn-secondary:hover {
+  background: var(--bleu);
+  color: #fff;
+}
+
+/* ============================================================
+   HUD
+   ============================================================ */
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.2rem;
+  background: linear-gradient(90deg, var(--bleu) 0%, #0d2044 40%, var(--rouge) 100%);
+  border-bottom: 3px solid var(--or);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.hud-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--or-cl);
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.hud-icon { font-size: 1.1rem; }
+
+.hud-stats {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.stat-block {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.stat-label {
+  font-family: var(--font-title);
+  color: rgba(255,255,255,0.75);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.stat-bar-wrap {
+  width: 90px;
+  height: 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.stat-bar {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+}
+.influence-bar { background: linear-gradient(90deg, #4a90d9, #74b9ff); }
+.danger-bar    { background: linear-gradient(90deg, #e17055, #d63031); }
+.stat-val {
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  font-weight: 700;
+  min-width: 26px;
+}
+
+.hud-date {
+  font-family: var(--font-title);
+  color: var(--or);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px rgba(201,168,76,0.5);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   ZONE DE JEU PRINCIPALE
+   ============================================================ */
+#screen-game {
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(26,58,110,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #f0e6c8 0%, #e8d8b0 50%, #f0e6c8 100%);
+  padding-top: 70px;
+  padding-bottom: 60px;
+}
+
+#game-main {
+  max-width: 780px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ============================================================
+   ÉVÉNEMENT ALÉATOIRE
+   ============================================================ */
+.random-event {
+  background: linear-gradient(135deg, #fff8e6, #ffeaa7);
+  border: 3px solid var(--or);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 24px rgba(201,168,76,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
+  animation: slideDown 0.4s ease;
+  text-align: center;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.random-event.hidden { display: none; }
+.re-header {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  color: var(--rouge);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+.re-effects {
+  margin: 0.7rem 0;
+  font-family: var(--font-title);
+  font-size: 0.88rem;
+  color: var(--text-med);
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.re-effect-tag {
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+.re-effect-tag.positive  { background: #d4f4dd; color: #1a6b2a; border: 1px solid #2ecc71; }
+.re-effect-tag.negative  { background: #fde8e8; color: #8b1a1a; border: 1px solid #e74c3c; }
+.re-effect-tag.neutral   { background: #e8eaf6; color: #1a3a6e; border: 1px solid #3498db; }
+
+/* ============================================================
+   CARTE DE SCÈNE
+   ============================================================ */
+.scene-card {
+  background: 
+    linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.1) 100%),
+    var(--parchemin);
+  border: 2px solid var(--parchemin-ddk);
+  border-radius: 4px;
+  padding: 2rem 2.2rem;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    inset 0 -1px 0 rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Coins décoratifs */
+.scene-card::before, .scene-card::after {
+  content: '⚜';
+  position: absolute;
+  font-size: 1.5rem;
+  color: var(--or);
+  opacity: 0.4;
+}
+.scene-card::before { top: 10px; left: 12px; }
+.scene-card::after  { bottom: 10px; right: 12px; }
+
+.step-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--bleu), var(--bleu-cl));
+  color: var(--or-cl);
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.9rem;
+  border-radius: 2px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.scene-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  color: var(--bleu);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.03em;
+}
+
+.scene-date {
+  font-family: var(--font-alt);
+  font-style: italic;
+  color: var(--rouge);
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--parchemin-ddk);
+}
+
+.context-box {
+  background: rgba(255,255,255,0.45);
+  border-left: 4px solid var(--or);
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.3rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--text-med);
+}
+.context-box strong { color: var(--bleu); }
+
+.scene-narrative {
+  font-family: var(--font-alt);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-dark);
+  margin-bottom: 1.8rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+  border: 1px solid rgba(201,168,76,0.25);
+}
+.scene-narrative em { color: var(--rouge); font-style: italic; }
+.scene-narrative strong { color: var(--bleu); }
+
+/* ============================================================
+   ZONE DE CHOIX
+   ============================================================ */
+.choice-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.choice-label {
+  font-family: var(--font-title);
+  font-size: 0.88rem;
+  color: var(--rouge);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+.choice-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,0.55);
+  border: 2px solid var(--parchemin-ddk);
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-text);
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  transition: all 0.22s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.choice-btn::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--or);
+  transform: scaleY(0);
+  transition: transform 0.22s;
+}
+.choice-btn:hover::before { transform: scaleY(1); }
+.choice-btn:hover {
+  border-color: var(--bleu-cl);
+  background: rgba(255,255,255,0.8);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(26,58,110,0.15);
+}
+.choice-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.choice-num {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--bleu);
+  min-width: 26px;
+  line-height: 1.4;
+}
+
+.choice-text { flex: 1; }
+.choice-title {
+  font-weight: 600;
+  color: var(--bleu);
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.choice-desc { color: var(--text-med); font-size: 0.93rem; }
+
+/* ============================================================
+   PANNEAU CONSÉQUENCE (affiché après un choix)
+   ============================================================ */
+.consequence-panel {
+  background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(245,234,208,0.9));
+  border: 2px solid var(--or);
+  border-radius: 4px;
+  padding: 1.3rem 1.5rem;
+  margin-top: 1.2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  animation: fadeIn 0.5s ease;
+}
+.consequence-header {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  color: var(--rouge);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.7rem;
+}
+.consequence-text {
+  font-family: var(--font-alt);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+.consequence-effects {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.effect-tag {
+  padding: 0.25rem 0.8rem;
+  border-radius: 12px;
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.effect-tag.up    { background: #d4f4dd; color: #1a6b2a; border: 1px solid #2ecc71; }
+.effect-tag.down  { background: #fde8e8; color: #8b1a1a; border: 1px solid #e74c3c; }
+.effect-tag.warn  { background: #fff3cd; color: #7c4b00; border: 1px solid #f39c12; }
+
+.btn-next {
+  padding: 0.65rem 1.8rem;
+  background: linear-gradient(135deg, var(--rouge), var(--rouge-cl));
+  color: #fff;
+  border: 2px solid var(--rouge-cl);
+  border-radius: 4px;
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-transform: uppercase;
+  box-shadow: 0 3px 12px rgba(139,26,26,0.35);
+}
+.btn-next:hover {
+  background: linear-gradient(135deg, var(--bleu), var(--bleu-cl));
+  border-color: var(--bleu-cl);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   JOURNAL
+   ============================================================ */
+#journal-panel {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.journal-header {
+  background: linear-gradient(90deg, var(--bleu), var(--bleu-cl));
+  color: var(--or-cl);
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+.journal-header:hover { background: linear-gradient(90deg, var(--bleu-cl), var(--bleu)); }
+
+.journal-entries {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--parchemin-ddk);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.journal-entries.open { max-height: 320px; overflow-y: auto; }
+
+.journal-entry {
+  padding: 0.6rem 1.2rem;
+  border-bottom: 1px solid var(--parchemin-ddk);
+  font-family: var(--font-alt);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-med);
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+.journal-entry:last-child { border-bottom: none; }
+.journal-entry .je-date {
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  color: var(--rouge);
+  min-width: 72px;
+  padding-top: 0.15rem;
+  font-weight: 700;
+}
+
+/* ============================================================
+   ÉCRAN FIN
+   ============================================================ */
+#screen-end {
+  background: 
+    linear-gradient(160deg, rgba(26,58,110,0.95) 0%, rgba(10,8,6,0.98) 50%, rgba(139,26,26,0.92) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.end-content {
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+}
+
+.end-icon { font-size: 4rem; margin-bottom: 1rem; animation: bounce 1s ease 0.3s both; }
+@keyframes bounce {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.end-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  color: var(--or-cl);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.end-subtitle {
+  font-family: var(--font-alt);
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.end-story {
+  background: rgba(245,234,208,0.12);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 6px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-alt);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.88);
+  text-align: left;
+}
+
+.end-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.end-stat {
+  text-align: center;
+}
+.end-stat-val {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--or-cl);
+  display: block;
+}
+.end-stat-label {
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.end-history {
+  background: rgba(201,168,76,0.12);
+  border-left: 4px solid var(--or);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.8rem;
+  text-align: left;
+  border-radius: 0 4px 4px 0;
+}
+.end-history h4 {
+  font-family: var(--font-title);
+  color: var(--or-cl);
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.end-history p {
+  font-family: var(--font-text);
+  color: rgba(255,255,255,0.78);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   ANIMATIONS TRANSITIONS SCÈNE
+   ============================================================ */
+.scene-card.transition-out {
+  animation: slideOut 0.35s ease forwards;
+}
+.scene-card.transition-in {
+  animation: slideIn 0.45s ease forwards;
+}
+@keyframes slideOut {
+  to { opacity: 0; transform: translateX(-30px); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ============================================================
+   SCROLLBAR CUSTOM
+   ============================================================ */
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: var(--parchemin-dk); }
+::-webkit-scrollbar-thumb {
+  background: var(--or);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .scene-card { padding: 1.3rem 1.1rem; }
+  #hud { padding: 0.45rem 0.8rem; }
+  .stat-bar-wrap { width: 60px; }
+  .hud-stats { gap: 0.6rem; }
+  .stat-label { display: none; }
+  .end-stats { gap: 1.2rem; }
+}
