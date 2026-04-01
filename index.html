@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Révolution Française – Livre dont vous êtes le héros</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========== ÉCRAN TITRE ========== -->
+  <div id="screen-title" class="screen active">
+    <div class="title-bg"></div>
+    <div class="title-content">
+      <div class="fleur-de-lis">⚜</div>
+      <h1 class="main-title">LA RÉVOLUTION<br/><span>FRANÇAISE</span></h1>
+      <p class="subtitle">1789 — 1799</p>
+      <div class="divider-ornament">❧ ✦ ❧</div>
+      <p class="tagline">
+        <em>« Vous êtes député du Tiers-État.<br/>
+        La France tremble. L'Histoire vous attend. »</em>
+      </p>
+      <div class="cockade"></div>
+      <form id="form-name" class="name-form">
+        <label for="player-name">Votre nom, Citoyen :</label>
+        <input type="text" id="player-name" placeholder="ex : Dupont" maxlength="20" autocomplete="off" />
+        <button type="submit" class="btn-primary">Commencer l'aventure</button>
+      </form>
+      <p class="level-info">📚 Niveau : Seconde Professionnelle · Durée estimée : 20-30 min</p>
+    </div>
+  </div>
+
+  <!-- ========== ÉCRAN DE JEU ========== -->
+  <div id="screen-game" class="screen">
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-identity">
+        <span class="hud-icon">🎖</span>
+        <span id="hud-name">Citoyen</span>
+      </div>
+      <div class="hud-stats">
+        <div class="stat-block">
+          <span class="stat-label">Influence</span>
+          <div class="stat-bar-wrap">
+            <div id="bar-influence" class="stat-bar influence-bar" style="width:50%"></div>
+          </div>
+          <span id="val-influence" class="stat-val">50</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">Danger</span>
+          <div class="stat-bar-wrap">
+            <div id="bar-danger" class="stat-bar danger-bar" style="width:20%"></div>
+          </div>
+          <span id="val-danger" class="stat-val">20</span>
+        </div>
+      </div>
+      <div id="hud-date" class="hud-date">1789</div>
+    </div>
+
+    <!-- Zone principale -->
+    <div id="game-main">
+      <!-- Panneau d'événement aléatoire -->
+      <div id="random-event-panel" class="random-event hidden">
+        <div class="re-header">⚡ Événement imprévu !</div>
+        <p id="re-text"></p>
+        <div id="re-effects" class="re-effects"></div>
+        <button id="re-close" class="btn-secondary">Continuer</button>
+      </div>
+
+      <!-- Carte de scène -->
+      <div id="scene-card" class="scene-card">
+        <div id="scene-step-badge" class="step-badge"></div>
+        <h2 id="scene-title" class="scene-title"></h2>
+        <div id="scene-date" class="scene-date"></div>
+        <div id="scene-context" class="scene-context context-box"></div>
+        <div id="scene-narrative" class="scene-narrative"></div>
+        <div id="choice-area" class="choice-area"></div>
+      </div>
+    </div>
+
+    <!-- Journal -->
+    <div id="journal-panel">
+      <div class="journal-header" id="journal-toggle">
+        📜 Journal de bord <span id="journal-arrow">▼</span>
+      </div>
+      <div id="journal-entries" class="journal-entries"></div>
+    </div>
+  </div>
+
+  <!-- ========== ÉCRAN FIN ========== -->
+  <div id="screen-end" class="screen">
+    <div class="end-content">
+      <div id="end-icon" class="end-icon">🏛</div>
+      <h2 id="end-title" class="end-title">Fin de votre aventure</h2>
+      <p id="end-subtitle" class="end-subtitle"></p>
+      <div id="end-story" class="end-story"></div>
+      <div id="end-stats" class="end-stats"></div>
+      <div id="end-history" class="end-history"></div>
+      <button id="btn-restart" class="btn-primary">Recommencer</button>
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
